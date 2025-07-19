@@ -44,7 +44,7 @@ def quick_modified_analysis():
             category = q.get("category", "")
             if category == "Open Consulting":
                 categories["Open Consulting"].append(q["id"])
-            elif category in ["Technical Details", "Literature Survey"]:
+            elif category in ["Technical Details", "Literature Review"]:
                 categories["Technical & Literature"].append(q["id"])
         
         print(f"✅ 问题分类统计:")

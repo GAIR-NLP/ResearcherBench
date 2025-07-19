@@ -14,7 +14,7 @@
     {
         "id": 3,
         "question": "In multimodal pretraining, the current mainstream paradigms are based on image tokens and stable diffusion. Analyzing the latest advancements (by April 2025) in these two technical approaches, with reference to the most recent papers, which one appears to be more promising and why?",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Computer Vision"
     },
     {
@@ -32,13 +32,13 @@
     {
         "id": 6,
         "question": "Compare the Transformer and Mamba model architectures, analyzing their performance and technical characteristics in different application scenarios. Based on the latest research, discuss the advantages and disadvantages of both models and their applicable scenarios.",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Model Architecture"
     },
     {
         "id": 7,
         "question": "Why can models trained on synthetic data outperform the models that provide the synthetic data? Please find the latest research papers that provide evidence to support this claim.",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Synthetic Data"
     },
     {
@@ -56,13 +56,13 @@
     {
         "id": 10,
         "question": "What are the specific differences between the two major RL designs behind DeepMind and OpenAI? Both DeepMind and OpenAI have made significant achievements in deep reinforcement learning, but by analyzing some tutorial details from David Silver and Sergey Levine, I feel that their understanding and implementation of RL have quite different approaches. Is there a more in-depth comparison of these two RL research institutions?",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Reinforcement Learning"
     },
     {
         "id": 11,
         "question": "How can research on an agent's planning capabilities, as well as an AI's understanding and simulation of the real world—including improvements in visual perception—be systematically approached? Please outline key research directions and trends in this field, referencing relevant academic papers.",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Embodied AI"
     },
     {
@@ -92,7 +92,7 @@
     {
         "id": 16,
         "question": "For complex reasoning tasks (e.g., tasks involving multiple citations or extended reasoning chains), what are the strengths of current agent technologies, and what are their limitations? Please analyze this in the context of research since June 2024.",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "AI Agents"
     },
     {
@@ -104,7 +104,7 @@
     {
         "id": 18,
         "question": "In the context of downstream SFT (Supervised Fine-Tuning) task for generative models, training data often contain a large number of domain-specific high-frequency words, which may cause the model to unintentionally generate these words frequently during prediction. How can we design strategies at the algorithmic level to mitigate or resolve this issue?",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Model Training/Fine-tuning"
     },
     {
@@ -254,7 +254,7 @@
     {
         "id": 43,
         "question": "What overlooked system architecture challenges need solving to fully realize AI's potential across cloud and edge computing?",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "AI Infrastructure"
     },
     {
@@ -266,7 +266,7 @@
     {
         "id": 45,
         "question": "What is MCP (Model Context Protocol)? How does it address the data connectivity challenges in LLM applications, and what are the differences compared to Function Calling and AI Agents?",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "LLM Integration"
     },
     {
@@ -278,7 +278,7 @@
     {
         "id": 47,
         "question": "How can we optimize large language model alignment: from RLHF to RLAIF, to better leverage pretrained models' potential and align with human preferences?",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Reinforcement Learning"
     },
     {
@@ -290,7 +290,7 @@
     {
         "id": 49,
         "question": "From a technical perspective, how to understand the similarities and differences between Reinforcement Learning (RL) algorithms and Supervised Fine-Tuning (SFT) in Large Language Models (LLMs), as well as their respective advantages and disadvantages in model training?",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Reinforcement Learning"
     },
     {
@@ -302,13 +302,13 @@
     {
         "id": 51,
         "question": "What is the conceptual difference between Mixture of Experts (MoE) in Large Language Models versus traditional recommendation systems, and why do LLMs process tokens rather than entire sentences through individual experts?",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Model Architecture"
     },
     {
         "id": 52,
         "question": "How has RAG technology evolved in 2024, and what are the key technical innovations that addressed its major pain points?",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Retrieval-Augmented Generation"
     },
     {
@@ -326,25 +326,25 @@
     {
         "id": 55,
         "question": "Why has the Transformer architecture become the dominant foundation for large language models (LLMs), and what fundamental advantages does it have over alternative architectures like RNNs and LSTMs?",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Model Architecture"
     },
     {
         "id": 56,
         "question": "What are the architectural advantages of Transformer models over CNNs for computer vision tasks, and what evidence suggests they could eventually become the dominant architecture for visual processing?",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Computer Vision"
     },
     {
         "id": 57,
         "question": "What is the evolution path of multimodal models from early visual representations to current multimodal large language models, and what are the key technological breakthroughs along this journey?",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Multimodal AI"
     },
     {
         "id": 58,
         "question": "What are the technical aspects and implementation challenges of fine-tuning Large Language Models, and how do techniques like LoRA address these challenges?",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Model Training/Fine-tuning"
     },
     {
@@ -362,19 +362,19 @@
     {
         "id": 61,
         "question": "How can the hallucination problem in large models be addressed from the perspective of knowledge boundaries? What effective techniques can help models accurately express their knowledge boundaries when encountering unknown knowledge?",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Hallucination"
     },
     {
         "id": 62,
         "question": "How can we effectively detect hallucinations in large language models by utilizing their internal states, and what advantages does this approach offer over external detection methods?",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Model Interpretability"
     },
     {
         "id": 63,
         "question": "What is \"extrinsic hallucination\" in large language models? How does it differ from intrinsic hallucinations in the context, and what are the main methods to reduce type of hallucination?",
-        "category": "Literature Survey",
+        "category": "Literature Review",
         "Subject": "Model Reliability"
     },
     {
