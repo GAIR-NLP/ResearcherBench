@@ -44,30 +44,30 @@ ResearcherBench employs a rigorous data collection methodology to ensure authent
 ### Dataset Composition
 
 
-We compiled a dataset of 65 research questions expertly selected from real-world scientific scenarios such as laboratory discussions and interviews across 35 different AI subjects (e.g. Model Architecture, Reinforcement Learning, AI Policy and Ethics), categorized into three types: Technical Details, Literature Survey, and Open Consulting.
+We compiled a dataset of 65 research questions expertly selected from real-world scientific scenarios such as laboratory discussions and interviews across 35 different AI subjects (e.g. Model Architecture, Reinforcement Learning, AI Policy and Ethics), categorized into three types: Technical Details, Literature Review, and Open Consulting.
 
 ![](pics/graph.png)
 
 
 ## 🔬 Evaluation Framework
 
-ResearcherBench introduces a dual evaluation framework that comprehensively assesses DARS performance through both qualitative **insight evaluation** and quantitative **factual assessment**. We combines expert-designed rubric assessment with automated factual verification to capture both the depth of understanding and the reliability of generated research content.
+ResearcherBench introduces a dual evaluation framework that comprehensively assesses DARS performance through both **rubric assessment** and **factual assessment**. We combine expert-designed criteria evaluation with automated factual verification to capture both the depth of understanding and the reliability of generated research content.
 
 ### **1. Rubric Assessment**
 
-- **Key Insight Extraction**: We employ Claude-3.7-Sonnet to analyze contextual source materials and extract key insights that require deep thinking and cross-domain synthesis. This automated extraction process generates comprehensive reference materials that serve as the foundation for subsequent expert review, ensuring that complex research questions are broken down into their essential analytical components.
+- **Key Insight Extraction**: We employ Claude-3.7-Sonnet to analyze from multiple diverse contextual sources, and extract key insights that require deep thinking and cross-domain synthesis. This automated extraction process generates comprehensive reference materials that contain high-value insights, which then serve as auxiliary materials for human expert annotation.
 
-- **Human Expert Rubric Design**: Experienced researchers systematically transform the extracted insights into operational evaluation criteria, where each rubric item represents specific reasoning aspects necessary for comprehensive responses. The rubric items are assigned weights (1-3) based on their relative importance to overall answer quality, creating a structured framework that captures both the breadth and depth of expected research contributions.
+- **Human Expert Rubric Design**: Experienced researchers transform extracted insights into weighted evaluation criteria (1-3 scale), creating a structured framework that captures the breadth and depth of expected research contributions.
 
-- **Assessment Methodology**: For each question, we evaluate whether DARS responses cover the key points specified in the expert-designed rubric and calculate the weighted coverage score for these responses.
+- **Assessment Methodology**: For each question, we evaluate whether DARS responses cover the key insights specified in the expert-designed rubric and calculate the weighted coverage score for these responses.
 
 ### **2. Factual Assessment**
 
-- **Claim Extraction**: We employ an extract model (e.g. GPT-4.1) to extract all factual claims within DARS-generated reports along with their corresponding context passages. The Extract Model also examines whether each claim can be retrieved with a corresponding citation URL from the report.
+- **Claim Extraction**: We employ an extract model to extract all factual claims within DARS-generated reports along with their corresponding context passages. The Extract Model also examines whether each claim can be retrieved with a corresponding citation URL from the report.
 
-- **Citation Support Verification**: For each URL-claim-context triplet, we extract textual content from the URL source, then use a judge model (e.g. GPT-4.1) to perform binary evaluation of whether the extracted content supports the corresponding claim. 
+- **Citation Support Verification**: For each URL-claim-context triplet, we extract textual content from the URL source, then use a judge model to perform binary evaluation of whether the extracted content supports the corresponding claim. 
 
-- **Assessment Methodology**: We compute two metricsto assess different aspects of factual accuracy. The Faithfulness Score measures the accuracy of citations in supporting their corresponding claims, and the Groundedness Score evaluates the overall citation coverage of response content.
+- **Assessment Methodology**: We compute two metrics to assess different aspects of factual accuracy. The Faithfulness score measures the accuracy of citations in supporting their corresponding claims, and the Groundedness score evaluates the overall citation coverage of response content.
 
 ## 📊 Evaluation Results
 
@@ -219,8 +219,8 @@ If you use ResearcherBench in your research, please cite our paper:
 ```bibtex
 @article{researcherbench2025,
   title={ResearcherBench: Evaluating Deep AI Research Systems on the Frontiers of Scientific Inquiry},
-  author={Tianze Xu and Pengrui Lu and Lvmanshan Ye and Pengfei Liu},
+  author={Tianze Xu and Pengrui Lu and Lyumanshan Ye and Xiangkun Hu and Pengfei Liu},
   journal={arXiv preprint arXiv:2025.xxxxx},
-  year={2024}
+  year={2025}
 }
 ```
