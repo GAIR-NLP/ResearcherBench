@@ -46,7 +46,7 @@ ResearcherBench employs a rigorous data collection methodology to ensure authent
 
 We compiled a dataset of 65 research questions expertly selected from real-world scientific scenarios such as laboratory discussions and interviews across 35 different AI subjects (e.g. Model Architecture, Reinforcement Learning, AI Policy and Ethics), categorized into three types: Technical Details, Literature Review, and Open Consulting.
 
-![](pics/graph.png)
+![](pics/DatasetDistribution.jpg)
 
 
 ## 🔬 Evaluation Framework
