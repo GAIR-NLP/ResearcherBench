@@ -1,7 +1,7 @@
 <h1 align="center">ResearcherBench: Evaluating Deep AI Research Systems on the Frontiers of Scientific Inquiry</h1>
 
 <p align="center">
-📄 <a href="" target="_blank">Paper</a> &nbsp; | &nbsp;
+📄 <a href="https://arxiv.org/abs/2507.16280" target="_blank">Paper</a> &nbsp; | &nbsp;
     💻 <a href="https://github.com/GAIR-NLP/ResearcherBench" target="_blank">Code</a> &nbsp; | &nbsp;
     🌐 <a href="https://researcherbench.github.io/" target="_blank">Website</a>
 </p>
