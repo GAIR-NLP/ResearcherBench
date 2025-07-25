@@ -1,0 +1,54 @@
+# syntax=docker/dockerfile:1.4
+#
+# Rule 2: No torch version pin was found in the repository. Using the default
+# PyTorch image.
+#
+FROM pytorch/pytorch:2.3.0-cuda12.1-cudnn8-devel
+
+# Set CUDA_HOME to match the base image
+ENV CUDA_HOME=/usr/local/cuda-12.1
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Set the model name for the evaluation script
+ENV MODEL=my_model
+
+WORKDIR /app
+
+# Install git and clone the repository
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends git && \
+    rm -rf /var/lib/apt/lists/*
+RUN git clone https://github.com/GAIR-NLP/ResearcherBench.git .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Create a dummy model response file to make the demo runnable.
+# The evaluation scripts require this file to exist.
+COPY <<'JSON' data/user_data/my_model.json
+[
+    {
+        "id": 1,
+        "question": "What are the latest developments in quantum computing? (This is a dummy question)",
+        "response": "This is a dummy response for question 1. Recent advances in quantum computing include the development of more stable qubits and improved error correction codes. [1]"
+    },
+    {
+        "id": 2,
+        "question": "How does machine learning impact healthcare? (This is a dummy question)",
+        "response": "This is a dummy response for question 2. Machine learning is revolutionizing healthcare by enabling predictive diagnostics, personalized treatment plans, and accelerating drug discovery. [1]"
+    }
+]
+JSON
+
+# Make the evaluation script executable
+RUN chmod +x eval.sh
+
+# Set the command to run the evaluation script.
+# Note: This script requires OPENAI_API_KEY and JINA_API_KEY to be passed
+# as environment variables during `docker run`.
+# Example:
+# docker run --rm -it \
+#   -e OPENAI_API_KEY="sk-..." \
+#   -e JINA_API_KEY="..." \
+#   <image_name>
+CMD ["./eval.sh"]
