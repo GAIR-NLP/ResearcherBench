@@ -1,7 +1,7 @@
 <h1 align="center">ResearcherBench: Evaluating Deep AI Research Systems on the Frontiers of Scientific Inquiry</h1>
 
 <p align="center">
-📄 <a href="" target="_blank">Paper</a> &nbsp; | &nbsp;
+📄 <a href="https://arxiv.org/abs/2507.16280" target="_blank">Paper</a> &nbsp; | &nbsp;
     💻 <a href="https://github.com/GAIR-NLP/ResearcherBench" target="_blank">Code</a> &nbsp; | &nbsp;
     🌐 <a href="https://researcherbench.github.io/" target="_blank">Website</a>
 </p>
@@ -217,10 +217,13 @@ ResearcherBench/
 If you use ResearcherBench in your research, please cite our paper:
 
 ```bibtex
-@article{researcherbench2025,
-  title={ResearcherBench: Evaluating Deep AI Research Systems on the Frontiers of Scientific Inquiry},
-  author={Tianze Xu and Pengrui Lu and Lyumanshan Ye and Xiangkun Hu and Pengfei Liu},
-  journal={arXiv preprint arXiv:2025.xxxxx},
-  year={2025}
+@misc{xu2025researcherbenchevaluatingdeepai,
+      title={ResearcherBench: Evaluating Deep AI Research Systems on the Frontiers of Scientific Inquiry}, 
+      author={Tianze Xu and Pengrui Lu and Lyumanshan Ye and Xiangkun Hu and Pengfei Liu},
+      year={2025},
+      eprint={2507.16280},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2507.16280}, 
 }
 ```
