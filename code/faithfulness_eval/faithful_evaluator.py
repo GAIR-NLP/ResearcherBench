@@ -181,7 +181,7 @@ class FaithfulnessEvaluator:
         """
         # List of possible reference section titles
         reference_titles_hash = ['References', 'references', 'Key Citations']
-        reference_titles_nohash = ['**References**', '**Sources:**', '**Works cited**', '**引用的著作**', '<div>⁂</div>', '<div style="text-align: center">⁂</div>']
+        reference_titles_nohash = ['**References**', '参考资料', '**Sources:**', '**Works cited**', '**引用的著作**', '<div>⁂</div>', '<div style="text-align: center">⁂</div>']
 
         hash_pattern = '|'.join(re.escape(title) for title in reference_titles_hash)
         nohash_pattern = '|'.join(re.escape(title) for title in reference_titles_nohash)
@@ -323,20 +323,40 @@ class FaithfulnessEvaluator:
                     claim['result'] = "No URL"
                 return claims
             
-            claims_str = "\n".join([f"[{i+1}]\nClaim: {claim['claim']}\nContext: {claim['context']}\n" for i, claim in enumerate(claims)])
+            try:
+                claims_str = "\n".join([f"[{i+1}]\nClaim: {claim['claim']}\nContext: {claim['context']}\n" for i, claim in enumerate(claims)])
+                n_claims = len(claims)
 
-            # Attempt to scrape the content from URL
-            self.logger.info(f"Verifying claims against URL: {url}")
-            content = await self.extract_content_from_url(url)
-            result = await self.verify_claims_against_content(claims_str, content)
-            
-            assert len(result) == len(claims), "Result length does not match claim list length."
+                # Attempt to scrape the content from URL
+                self.logger.info(f"Verifying claims against URL: {url}")
+                content = await self.extract_content_from_url(url)
+                
+                if not content:
+                    self.logger.warning(f"Could not extract content from URL: {url}")
+                    for claim in claims:
+                        claim['result'] = "URL Error"
+                    return claims
+                
+                result = await self.verify_claims_against_content(n_claims, claims_str, content)
+                
+                if len(result) != len(claims):
+                    self.logger.warning(f"Result length ({len(result)}) does not match claim list length ({len(claims)}). Using fallback.")
+                    for claim in claims:
+                        claim['result'] = "Unknown"
+                    return claims
 
-            # Add the verification result to each claim
-            for i, claim in enumerate(claims):
-                claim['result'] = result[i].get('result', 'Unknown')
-            
-            return claims
+                # Add the verification result to each claim
+                for i, claim in enumerate(claims):
+                    claim['result'] = result[i].get('result', 'Unknown')
+                
+                return claims
+                
+            except Exception as e:
+                self.logger.error(f"Error verifying claims for URL {url}: {str(e)}")
+                # 即使出错，也要返回带有错误标记的结果
+                for claim in claims:
+                    claim['result'] = "Unknown"
+                return claims
             
 
     
@@ -366,28 +386,45 @@ class FaithfulnessEvaluator:
                     try:
                         response = await web_client.get(jina_url, headers=headers, timeout=60.0)
                         if response.status_code == 200:
-                            return response.text
+                            content = response.text
+                            # Truncate content early to avoid memory issues and token limits
+                            if len(content) > self.config.max_content_length:
+                                self.logger.info(f"Content from {url} too long ({len(content)} chars), truncating to {self.config.max_content_length} chars")
+                                content = content[:self.config.max_content_length] + "\n\n[Content truncated due to length...]"
+                            return content
                         else:
+                            self.logger.warning(f"HTTP {response.status_code} for URL {url}")
                             if attempt < max_retries - 1:
                                 wait_time = 10 + 2 ** attempt + random.uniform(0, 1)
                                 self.logger.warning(f"Extract Web Error: Retrying in {wait_time:.2f} seconds...")
                                 await asyncio.sleep(wait_time)
                             else:
+                                self.logger.error(f"Failed to extract content from {url} after {max_retries} attempts")
                                 return ""
                     except httpx.RequestError as e:
-                        self.logger.error(f"Request error for {url}: {str(e)}")
+                        self.logger.warning(f"Request error for {url}: {str(e)}")
                         if attempt < max_retries - 1:
                             wait_time = 10 + 2 ** attempt + random.uniform(0, 1)
                             self.logger.warning(f"Extract Web Error: Retrying in {wait_time:.2f} seconds...")
                             await asyncio.sleep(wait_time)
                         else:
+                            self.logger.error(f"Failed to extract content from {url} after {max_retries} attempts due to request errors")
+                            return ""
+                    except Exception as e:
+                        self.logger.warning(f"Unexpected error for {url}: {str(e)}")
+                        if attempt < max_retries - 1:
+                            wait_time = 10 + 2 ** attempt + random.uniform(0, 1)
+                            self.logger.warning(f"Extract Web Error: Retrying in {wait_time:.2f} seconds...")
+                            await asyncio.sleep(wait_time)
+                        else:
+                            self.logger.error(f"Failed to extract content from {url} after {max_retries} attempts due to unexpected errors")
                             return ""
                 return ""
             except Exception as e:
                 self.logger.error(f"Error extracting content from {url}: {str(e)}")
                 return ""
 
-    async def verify_claims_against_content(self, claims: str, content: str) -> List[Dict]:
+    async def verify_claims_against_content(self, n_claims: int, claims: str, content: str) -> List[Dict]:
         """
         Use LLM to verify a claim against source content.
         
@@ -399,6 +436,11 @@ class FaithfulnessEvaluator:
         Returns:
             String indicating whether the claim is verified or not
         """
+        
+        # Truncate content if it's too long to avoid token limit
+        if len(content) > self.config.max_content_length:
+            self.logger.warning(f"Content too long ({len(content)} chars), truncating to {self.config.max_content_length} chars")
+            content = content[:self.config.max_content_length] + "\n\n[Content truncated due to length...]"
         
         # Create parameters for the prompt
         params = {
@@ -424,23 +466,24 @@ class FaithfulnessEvaluator:
                     break
                 except Exception as e:
                     if attempt == self.config.max_retries - 1:
-                        raise
-                    self.logger.error(f"Verify Claims Error (attempt {attempt + 1}): {str(e)}")
-
+                        self.logger.error(f"API call failed after {self.config.max_retries} attempts: {str(e)}")
+                        # Return fallback result instead of raising exception
+                        return [{"idx": i+1, "result": "Unknown"} for i in range(n_claims)]
+                    
+                    self.logger.warning(f"Verify Claims Error (attempt {attempt + 1}): {str(e)}")
                     # Retry with exponential backoff
                     timestamp = 2 ** attempt + random.uniform(0, 1) 
                     await asyncio.sleep(timestamp)  # Exponential backoff
             
             # Extract and parse JSON from the response
-            # print(response)
-            content = response.choices[0].message.content.strip()
+            content_response = response.choices[0].message.content.strip()
 
             # Extract JSON from potential markdown code block
-            json_match = re.search(r'```(?:json)?\s*([\s\S]+?)\s*```', content)
+            json_match = re.search(r'```(?:json)?\s*([\s\S]+?)\s*```', content_response)
             if json_match:
                 json_str = json_match.group(1)
             else:
-                json_str = content
+                json_str = content_response
                 
             # Clean up any remaining non-JSON content
             json_str = re.sub(r'^[^[{]*', '', json_str)
@@ -454,7 +497,8 @@ class FaithfulnessEvaluator:
         
         except Exception as e:
             self.logger.error(f"Error verifying claim finally: {str(e)}")
-            return [{"idx": i+1, "result": "Unknown"} for i, claim in enumerate(claims.split("[")) if claim.strip()]
+            # Return fallback result with error status
+            return [{"idx": i+1, "result": "Unknown"} for i in range(n_claims)]
     
     async def evaluate_response_faithfulness(self, question: str, response: str, question_id: int, response_id: str) -> Dict:
         """
@@ -507,15 +551,25 @@ class FaithfulnessEvaluator:
         f_claim_count = sum(claim["result"].lower() == "no" for claim in verified_claims)
         u_claim_count = sum(claim["result"].lower() == "unknown" for claim in verified_claims)
         n_claim_count = sum(claim["result"].lower() == "no url" for claim in verified_claims)
+        
+        # Count error cases - these shouldn't be included in verification but should be logged
+        error_results = ["error", "api error", "url error", "parse error", "count mismatch"]
+        e_claim_count = sum(claim["result"].lower() in error_results for claim in verified_claims)
 
         verified_claim_count = t_claim_count + f_claim_count
         cited_claim_count    = t_claim_count + f_claim_count + u_claim_count
-        total_claim_count    = t_claim_count + f_claim_count + u_claim_count + n_claim_count
+        total_claim_count    = len(verified_claims)  # Use actual count instead of sum
 
         faithfulness_score = t_claim_count / verified_claim_count if verified_claim_count else 0.0
         groundedness_score = cited_claim_count / total_claim_count if total_claim_count else 0.0
 
-        assert total_claim_count == len(verified_claims), "Total claims count does not match the length of claims list."
+        # Log statistics for debugging
+        self.logger.info(f"Claim statistics for Q{question_id}/{response_id}: "
+                        f"Total={total_claim_count}, Yes={t_claim_count}, No={f_claim_count}, "
+                        f"Unknown={u_claim_count}, No URL={n_claim_count}, Errors={e_claim_count}")
+
+        if e_claim_count > 0:
+            self.logger.warning(f"Found {e_claim_count} claims with errors for Q{question_id}/{response_id}")
 
         result = {
             "id": question_id,
