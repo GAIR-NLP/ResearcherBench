@@ -4,44 +4,44 @@
 Prompt templates for AI model response evaluation
 """
 
-def get_single_rubric_evaluation_prompt(question: str, rubric: str, rubric_weight: int, 
+def get_single_rubric_evaluation_prompt(question: str, rubric: str, weight: int, 
                                           ai_response: str) -> str:
     """
-    Returns a prompt for evaluating if a single rubric item is covered in the AI response
+    Returns a prompt for evaluating if a single criterion is covered in the AI response
     
     Parameters:
     question (str): The research question posed by the user
-    rubric (str): The rubric item content to be evaluated
-    rubric_weight (int): The weight of the rubric item, indicating its importance
+    rubric (str): The criterion content to be evaluated
+    rubric_weight (int): The weight of the criterion, indicating its importance
     ai_response (str): The complete AI response text
     
     Returns:
-    str: Prompt for evaluating a single rubric item
+    str: Prompt for evaluating a single criterion
     """
     prompt = f"""# Rubric Coverage Evaluation
 
 ## Task
-Determine whether the AI response adequately covers the specific rubric item provided. Answer with "yes" or "no" followed by a brief justification.
+Determine whether the AI response adequately covers the specific criterion provided. Answer with "yes" or "no" followed by a brief justification.
 
 ## Input Materials
 <Question>: {question}
-<Rubric Item>: {rubric}
-<Rubric Weight>: {rubric_weight} (indicates the importance of this rubric item)
+<criterion>: {rubric}
+<Weight>: {weight} (indicates the importance of this criterion)
 <AI Response>: {ai_response}
 
 ## Evaluation Criteria
-- Answer "yes" if the AI response clearly includes or adequately expresses the main content of the rubric item
-- Answer "yes" if the response conveys the same meaning as the rubric item, even if using different terminology or phrasing
-- Answer "no" if the AI response only partially addresses or completely fails to mention the content of the rubric item
+- Answer "yes" if the AI response clearly includes or adequately expresses the main content of the criterion
+- Answer "yes" if the response conveys the same meaning as the criterion, even if using different terminology or phrasing
+- Answer "no" if the AI response only partially addresses or completely fails to mention the content of the criterion
 - Consider semantic equivalence, not just keyword matching
-- Pay special attention to technical details, numerical values, and specific claims in the rubric item
+- Pay special attention to technical details, numerical values, and specific claims in the criterion
 
 ## Output Format
 Your answer must begin with either "yes" or "no" followed by a brief justification.
 
 Example format:
-"yes: The response clearly addresses this rubric item by explaining [specific detail]..."
-"no: While the response mentions [related concept], it fails to address [specific aspect] of the rubric item..."
+"yes: The response clearly addresses this criterion by explaining [specific detail]..."
+"no: While the response mentions [related concept], it fails to address [specific aspect] of the criterion..."
 
 Note: Your assessment will be used to calculate recall metrics, so accuracy is critical."""
 

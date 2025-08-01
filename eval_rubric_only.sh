@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # ===================================================
-# DAIR Benchmark - ResearcherBench Evaluation Script
+# DARS Benchmark - ResearcherBench Evaluation Script
 # ===================================================
-# This script evaluates AI model responses using both rubric and faithfulness evaluation
+# This script evaluates AI model responses using rubric evaluation
 # Usage: 
 #   1. Set MODEL environment variable
-#   2. Run: ./faithful_eval.sh
+#   2. Run: ./eval_rubric_only.sh
 # ===================================================
 
 set -e  # Exit on any error
