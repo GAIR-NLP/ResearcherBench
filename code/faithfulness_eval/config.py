@@ -24,6 +24,7 @@ class Config:
         self.max_workers = int(os.getenv("MAX_WORKERS", "5"))
         self.max_retries = int(os.getenv("MAX_RETRIES", "3"))
         self.claims_step_size = int(os.getenv("CLAIMS_STEP_SIZE", "5"))
+        self.max_content_length = int(os.getenv("MAX_CONTENT_LENGTH", "950000"))  # Max chars for web content
         
         # Directory paths
         self.output_dir = os.getenv("OUTPUT_DIR", "./results")
