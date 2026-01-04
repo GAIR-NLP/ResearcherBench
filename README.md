@@ -8,11 +8,11 @@
 
 <h5 align="center"> If you like our project, please give us a star ⭐ on GitHub for the latest update.</h5>
 
+![](pics/Overview.png)
+
 ## ✨ Update
 - [4 Jan 2026] Added comprehensive evaluation for Claude Research, Doubao Deep Research, and Mita Deep Research.
 
-
-![](pics/Overview.png)
 
 ## 📋 Contents
 
@@ -233,4 +233,5 @@ If you use ResearcherBench in your research, please cite our paper:
       url={https://arxiv.org/abs/2507.16280}, 
 }
 ```
+
 
