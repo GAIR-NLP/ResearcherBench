@@ -8,6 +8,9 @@
 
 <h5 align="center"> If you like our project, please give us a star ⭐ on GitHub for the latest update.</h5>
 
+## ✨ Update
+- [4 Jan 2026] Added comprehensive evaluation for Claude Research, Doubao Deep Research, and Mita Deep Research.
+
 
 ![](pics/Overview.png)
 
@@ -80,6 +83,9 @@ Our evaluation of leading Deep AI Research Systems reveals significant insights 
 | ***Deep AI Research System*** |  |  |  |
 | OpenAI Deep Research | **0.7032** | 0.84 | 0.34 |
 | Gemini Deep Research | 0.6929 | **0.86** | 0.59 |
+| Claude Research | 0.6113 | - | - |
+| Mita Deep Research | 0.5835 | 0.65 | 0.59 |
+| Doubao Deep Research |  0.5754 | 0.78 | 0.63 |
 | Grok3 DeepSearch | 0.4414 | 0.69 | 0.32 |
 | Grok3 DeeperSearch | 0.4398 | 0.80 | 0.31 |
 | Perplexity Deep Research | 0.4800 | 0.85 | 0.56 |
@@ -227,3 +233,4 @@ If you use ResearcherBench in your research, please cite our paper:
       url={https://arxiv.org/abs/2507.16280}, 
 }
 ```
+
