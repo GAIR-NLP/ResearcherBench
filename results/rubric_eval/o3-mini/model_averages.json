@@ -1,0 +1,82 @@
+{
+  "Grok3deeper": {
+    "recall": 0.43984769230769233,
+    "recall_count": 65,
+    "organization_score": 5.0,
+    "organization_score_count": 65,
+    "sufficiency_score": 5.0,
+    "sufficiency_score_count": 65,
+    "weighted_average": 0.4219409282700422,
+    "total_items": 65
+  },
+  "Grok3": {
+    "recall": 0.4413923076923077,
+    "recall_count": 65,
+    "organization_score": 5.0,
+    "organization_score_count": 65,
+    "sufficiency_score": 4.984615384615385,
+    "sufficiency_score_count": 65,
+    "weighted_average": 0.4273658830620856,
+    "total_items": 65
+  },
+  "Perplexity": {
+    "recall": 0.4799615384615385,
+    "recall_count": 65,
+    "organization_score": 5.0,
+    "organization_score_count": 65,
+    "sufficiency_score": 4.984615384615385,
+    "sufficiency_score_count": 65,
+    "weighted_average": 0.47498493068113323,
+    "total_items": 65
+  },
+  "Doubao": {
+    "recall": 0.5753538461538462,
+    "recall_count": 65,
+    "weighted_average": 0.5720313441832429,
+    "total_items": 65
+  },
+  "Mita": {
+    "recall": 0.5835123076923077,
+    "recall_count": 65,
+    "weighted_average": 0.5738396624472574,
+    "total_items": 65
+  },
+  "Google": {
+    "recall": 0.6928738461538462,
+    "recall_count": 65,
+    "organization_score": 5.0,
+    "organization_score_count": 65,
+    "sufficiency_score": 4.969230769230769,
+    "sufficiency_score_count": 65,
+    "weighted_average": 0.6853526220614828,
+    "total_items": 65
+  },
+  "gpt-4o-search-preview": {
+    "recall": 0.35762,
+    "recall_count": 65,
+    "weighted_average": 0.352622061482821,
+    "total_items": 65
+  },
+  "OpenAI": {
+    "recall": 0.7032307692307692,
+    "recall_count": 65,
+    "organization_score": 5.0,
+    "organization_score_count": 65,
+    "sufficiency_score": 5.0,
+    "sufficiency_score_count": 65,
+    "weighted_average": 0.6913803496081977,
+    "total_items": 65
+  },
+  "Claude": {
+    "recall": 0.6113015384615385,
+    "recall_count": 65,
+    "weighted_average": 0.6015672091621459,
+    "total_items": 65
+  },
+  "sonar-reasoning-pro": {
+    "recall": 0.46632153846153845,
+    "recall_count": 65,
+    "weighted_average": 0.45449065702230257,
+    "total_items": 65
+  }
+}
