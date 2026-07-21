@@ -8,7 +8,7 @@
 
 <h5 align="center"> If you like our project, please give us a star ⭐ on GitHub for the latest update.</h5>
 
-![](pics/Overview.png)
+![](pics/overview.png)
 
 ## ✨ Update
 - [9 Jul 2026] 🎉 ResearcherBench has been accepted by COLM 2026! 
