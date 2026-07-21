@@ -1,4 +1,4 @@
-<h1 align="center">ResearcherBench: Evaluating Deep AI Research Systems on the Frontiers of Scientific Inquiry</h1>
+<h1 align="center">ResearcherBench: Evaluating Deep AI Research Systems on Open-ended AI Research Tasks</h1>
 
 <p align="center">
 📄 <a href="https://arxiv.org/abs/2507.16280" target="_blank">Paper</a> &nbsp; | &nbsp;
@@ -11,6 +11,7 @@
 ![](pics/Overview.png)
 
 ## ✨ Update
+- [9 Jul 2026] 🎉 ResearcherBench has been accepted by COLM 2026! 
 - [4 Jan 2026] Added comprehensive evaluation for Claude Research, Doubao Deep Research, and Mita Deep Research.
 
 
@@ -27,7 +28,7 @@
 
 ## 🎯 Overview
 
-As Deep AI Research Systems (DARS) become increasingly sophisticated, there is a growing need for evaluation methodologies that can assess their potential as genuine research partners rather than just information retrieval tools. ResearcherBench is a comprehensive evaluation benchmark specifically designed to assess DARS capabilities on frontier scientific questions by providing:
+As Deep AI Research Systems (DARS) become increasingly sophisticated, there is a growing need for evaluation methodologies that can assess their potential as genuine research partners rather than just information retrieval tools. ResearcherBench is a comprehensive evaluation benchmark specifically designed to assess DARS capabilities on open-ended AI research tasks by providing:
 
 - **Frontier Research Question Dataset**: 65 expertly curated research questions from authentic scientific scenarios, spanning 35 distinct AI research subjects
 - **Dual Evaluation Framework**: Combines expert-designed rubric assessment for insight quality with factual assessment for citation accuracy and reliability
